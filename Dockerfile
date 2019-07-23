@@ -4,6 +4,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get -y install \
+            vim \
+            certbot \
             apt-transport-https \
             ca-certificates \
             curl \
