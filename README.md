@@ -8,7 +8,7 @@
 
 
 
-Don't use steps below:
+# Don't use steps below:
 
 apt update && apt install -y certbot
 
@@ -27,14 +27,14 @@ https://github.com/hughperkins/howto-jenkins-ssl/blob/master/letsencrypt.md
 
 ALT FORMAT
 
-openssl pkcs12 -inkey privkey.pem -in cert.pem -export -out keys.pkcs12
+    openssl pkcs12 -inkey privkey.pem -in cert.pem -export -out keys.pkcs12
 
-keytool -importkeystore -srckeystore keys.pkcs12 -srcstoretype pkcs12 -destkeystore /var/lib/jenkins/jenkins.jks
+    keytool -importkeystore -srckeystore keys.pkcs12 -srcstoretype pkcs12 -destkeystore /var/lib/jenkins/jenkins.jks
 
-vi /etc/default/jenkins
+    vi /etc/default/jenkins
 
-JENKINS_ARGS="--webroot=/var/cache/\$NAME/war --httpPort=-1 --httpsPort=8443 --httpsKeyStore=/var/lib/jenkins/jenkins.jks --httpsKeyStorePassword=PASSWORD_SET_ON_CONVERT_TO_JKS"
+    JENKINS_ARGS="--webroot=/var/cache/\$NAME/war --httpPort=-1 --httpsPort=8443 --httpsKeyStore=/var/lib/jenkins/jenkins.jks --httpsKeyStorePassword=PASSWORD_SET_ON_CONVERT_TO_JKS"
 
-docker-compose restart
+    docker-compose restart
 
 
