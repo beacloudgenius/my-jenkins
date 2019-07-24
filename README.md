@@ -1,10 +1,15 @@
 docker build -t cloudgenius/jenkins-withdocker:lts .
 
+docker-compose -f docker-compose-nginx-proxy.yaml  up
+
 docker-compose exec cicd cat /var/jenkins_home/secrets/initialAdminPassword
 
 docker-compose exec cicd bash
 
 apt update && apt install -y certbot
+
+
+Don't use steps below:
 
 certbot certonly -n --standalone -m nilesh@cloudgeni.us --agree-tos --preferred-challenges http -d cicd.cloudgeni.us
 
@@ -30,3 +35,5 @@ vi /etc/default/jenkins
 JENKINS_ARGS="--webroot=/var/cache/\$NAME/war --httpPort=-1 --httpsPort=8443 --httpsKeyStore=/var/lib/jenkins/jenkins.jks --httpsKeyStorePassword=PASSWORD_SET_ON_CONVERT_TO_JKS"
 
 docker-compose restart
+
+
