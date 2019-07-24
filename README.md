@@ -1,15 +1,16 @@
-docker build -t cloudgenius/jenkins-withdocker:lts .
+    docker build -t cloudgenius/jenkins-withdocker:lts .
 
-docker-compose -f docker-compose-nginx-proxy.yaml  up
+    docker-compose -f docker-compose-nginx-proxy.yaml  up
 
-docker-compose exec cicd cat /var/jenkins_home/secrets/initialAdminPassword
+    docker-compose exec cicd cat /var/jenkins_home/secrets/initialAdminPassword
 
-docker-compose exec cicd bash
+    docker-compose exec cicd bash
 
-apt update && apt install -y certbot
 
 
 Don't use steps below:
+
+apt update && apt install -y certbot
 
 certbot certonly -n --standalone -m nilesh@cloudgeni.us --agree-tos --preferred-challenges http -d cicd.cloudgeni.us
 
