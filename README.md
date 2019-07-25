@@ -14,6 +14,13 @@ personal access token
 export KUBECONFIG=/kube/config
 alias k=kubectl
 
+upload config to cloud shell
+
+gcloud beta compute --project "oceanic-isotope-233522" scp --zone "us-west1-a" ~/config
+kk://home/eeshan/config
+
+gcloud beta compute --project "oceanic-isotope-233522" ssh --zone "us-west1-a" "kk"
+
 per repo
 username/pass
 
