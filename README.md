@@ -6,35 +6,37 @@
 
     docker-compose exec cicd bash
 
+github connection
 
+system wide
+personal access token
 
-# Don't use steps below:
+export KUBECONFIG=/kube/config
+alias k=kubectl
 
-apt update && apt install -y certbot
+per repo
+username/pass
 
-certbot certonly -n --standalone -m nilesh@cloudgeni.us --agree-tos --preferred-challenges http -d cicd.cloudgeni.us
+https://github.com/beacloudgenius/my-jenkins
 
-    cd /etc/letsencrypt/live/cicd.cloudgeni.us
-    cp /etc/letsencrypt/live/cicd.cloudgeni.us/* .
-    openssl rsa -in privkey.pem -out privkey-rsa.pem
-    java -jar /usr/share/jenkins/jenkins.war  \
-        --httpsPort=443 \
-        --httpPort=-1 \
-        --httpsCertificate=fullchain.pem \
-        --httpsPrivateKey=privkey-rsa.pem
+// agent:
+// enabled: true
+// image: "cloudgenius/jnlp-slave-with-docker-helm-kubectl"
+// tag: "latest"
 
-https://github.com/hughperkins/howto-jenkins-ssl/blob/master/letsencrypt.md
+https://github.com/mattsauce/jenkins-slave-helm-kubectl-docker/blob/master/Dockerfile
+https://github.com/korekontrol/docker-jnlp-slave-docker
+https://github.com/dtzar/jnlp-slave-helm/blob/master/Dockerfile
+https://github.com/jorgeacetozi/jenkins-slave-kubectl-docker-image/blob/master/Dockerfile
 
-ALT FORMAT
+https://www.youtube.com/watch?v=xzbMHj1ly9c
+https://github.com/davidcurrie/index2018
+https://www.slideshare.net/davidcurrie/continuous-delivery-to-kubernetes-with-jenkins-and-helm
 
-    openssl pkcs12 -inkey privkey.pem -in cert.pem -export -out keys.pkcs12
+https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes
+https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes/blob/master/sample-app/Jenkinsfile#L7
+https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes/issues/95
 
-    keytool -importkeystore -srckeystore keys.pkcs12 -srcstoretype pkcs12 -destkeystore /var/lib/jenkins/jenkins.jks
+https://bootcamp.codecentric.ai/
 
-    vi /etc/default/jenkins
-
-    JENKINS_ARGS="--webroot=/var/cache/\$NAME/war --httpPort=-1 --httpsPort=8443 --httpsKeyStore=/var/lib/jenkins/jenkins.jks --httpsKeyStorePassword=PASSWORD_SET_ON_CONVERT_TO_JKS"
-
-    docker-compose restart
-
-
+http://devopsku.be/components/keycloak/
