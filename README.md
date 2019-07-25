@@ -36,7 +36,3 @@ https://www.slideshare.net/davidcurrie/continuous-delivery-to-kubernetes-with-je
 https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes
 https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes/blob/master/sample-app/Jenkinsfile#L7
 https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes/issues/95
-
-https://bootcamp.codecentric.ai/
-
-http://devopsku.be/components/keycloak/
