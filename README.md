@@ -14,7 +14,12 @@ personal access token
 export KUBECONFIG=/kube/config
 alias k=kubectl
 
+Read the config
+check path in config
 upload config to cloud shell
+
+gcloud auth login # in the jenkins runner container
+gcloud config set project oceanic-isotope-233522
 
 gcloud beta compute --project "oceanic-isotope-233522" scp --zone "us-west1-a" ~/config
 kk://home/eeshan/config
