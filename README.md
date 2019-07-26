@@ -11,23 +11,34 @@ github connection
 system wide
 personal access token
 
-export KUBECONFIG=/kube/config
-alias k=kubectl
-
-Read the config
-check path in config
-upload config to cloud shell
-
-gcloud auth login # in the jenkins runner container
-gcloud config set project oceanic-isotope-233522
-
-gcloud beta compute --project "oceanic-isotope-233522" scp --zone "us-west1-a" ~/config
-kk://home/eeshan/config
-
-gcloud beta compute --project "oceanic-isotope-233522" ssh --zone "us-west1-a" "kk"
-
 per repo
 username/pass
+
+# Get config
+
+    gcloud container clusters get-credentials andromeda --zone us-west1-a --project oceanic-isotope-233522
+
+# Read the config
+
+    check path in config
+
+# upload config to cloud shell using scp
+
+    gcloud beta compute --project "oceanic-isotope-233522" scp --zone "us-west1-a" ~/config kk://home/eeshan/config
+
+# gcloud login in the jenkins runner container
+
+    gcloud auth login
+    gcloud config set project oceanic-isotope-233522
+
+# connect to the host machine
+
+    gcloud beta compute --project "oceanic-isotope-233522" ssh --zone "us-west1-a" "kk"
+
+
+
+    export KUBECONFIG=/kube/config
+    alias k=kubectl
 
 https://github.com/beacloudgenius/my-jenkins
 

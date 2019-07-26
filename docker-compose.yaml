@@ -41,6 +41,7 @@ services:
       - VIRTUAL_PORT=8080
       - LETSENCRYPT_HOST=cicd.cloudgeni.us
       - LETSENCRYPT_EMAIL=nilesh@cloudgeni.us
+      - KUBECONFIG=/kube/config
 
 volumes:
   conf:
