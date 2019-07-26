@@ -1,66 +1,106 @@
-    docker build -t cloudgenius/jenkins-withdocker:lts .
+# Set up a new VM n1-standard-2
 
-    docker-compose -f docker-compose-nginx-proxy.yaml  up
+    allow http https
+    note IP address
+    cicd.cloudgeni.us  = set DNS A record
 
-    docker-compose exec cicd cat /var/jenkins_home/secrets/initialAdminPassword
+# connect to the machine
 
-    docker-compose exec cicd bash
+    gcloud beta compute --project "oceanic-isotope-233522" ssh --zone "us-west1-a" "kk"
 
-github connection
+# update and install git
 
-system wide
-personal access token
+    sudo su
+    apt update && apt install -y git
+    exit # from root
 
-per repo
-username/pass
+# clone the repo
+
+    git clone https://github.com/beacloudgenius/my-jenkins.git
+    cd my-jenkins
+
+# setup docker on this
+
+    sudo su
+    sh docker.sh
+    exit # from root
+
+    sudo usermod -aG docker $USER
+    exit #out to cloud shell
 
 # Get config
 
+    rm -rf ~/.kube
     gcloud container clusters get-credentials andromeda --zone us-west1-a --project oceanic-isotope-233522
 
 # Read the config
 
     check path in config
 
-# upload config to cloud shell using scp
+# upload config to the vm using scp
 
     gcloud beta compute --project "oceanic-isotope-233522" scp --zone "us-west1-a" ~/.kube/config kk://home/eeshan/
 
-# connect to the host machine
+# connect back to the vm again to allow for docker without the need to run sudo
 
     gcloud beta compute --project "oceanic-isotope-233522" ssh --zone "us-west1-a" "kk"
+
+# place config in ~/.kube/config
+
     mkdir ~/.kube
     mv ~/config ~/.kube
 
-# within the jenkins runner container
+    cd ~/my-jenkins/
 
-    cd my-jenkins
+# edit the docker-compose.yaml to match the subdomain.domain.TLD of your choice
+
+find cicd.cloudgeni.us and replace it your specific detail
+
+    environment:
+      - VIRTUAL_HOST=cicd.cloudgeni.us
+      - LETSENCRYPT_HOST=cicd.cloudgeni.us
+
+# run the jenkins runner using docker-compose
+
+    docker-compose up -d
+
+# grab jenkins initial admin password
+
+wait for 1 minute and
+
+    docker-compose exec cicd cat /var/jenkins_home/secrets/initialAdminPassword
+
+# open https://subdomain.domain.TLD in a browser
+
+    finish through the user creation process
+
+# access the cicd runner
+
+    cd ~/my-jenkins
     docker-compose exec cicd bash
+
+# set up gcloud login and verify kubeconfig
+
+#### account for gloud bin location
+
+    mkdir -p /google/google-cloud-sdk/bin/
+    ln -s /usr/bin/gcloud /google/google-cloud-sdk/bin/
+
+PS: location of gcloud in shell (/google/google-cloud-sdk/bin/) is different from the standard (/usr/bin) in the jenkins runner
 
 ### in the jenkins runner container
 
     gcloud auth login
+
+    follow instructions on the terminal
+
     gcloud config set project oceanic-isotope-233522
 
     # export KUBECONFIG=/kube/config
     alias k=kubectl
 
-https://github.com/beacloudgenius/my-jenkins
+# github connection
 
-// agent:
-// enabled: true
-// image: "cloudgenius/jnlp-slave-with-docker-helm-kubectl"
-// tag: "latest"
+    system wide using a personal access token
 
-https://github.com/mattsauce/jenkins-slave-helm-kubectl-docker/blob/master/Dockerfile
-https://github.com/korekontrol/docker-jnlp-slave-docker
-https://github.com/dtzar/jnlp-slave-helm/blob/master/Dockerfile
-https://github.com/jorgeacetozi/jenkins-slave-kubectl-docker-image/blob/master/Dockerfile
-
-https://www.youtube.com/watch?v=xzbMHj1ly9c
-https://github.com/davidcurrie/index2018
-https://www.slideshare.net/davidcurrie/continuous-delivery-to-kubernetes-with-jenkins-and-helm
-
-https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes
-https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes/blob/master/sample-app/Jenkinsfile#L7
-https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes/issues/95
+    per repo using username/pass
