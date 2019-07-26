@@ -24,20 +24,25 @@ username/pass
 
 # upload config to cloud shell using scp
 
-    gcloud beta compute --project "oceanic-isotope-233522" scp --zone "us-west1-a" ~/config kk://home/eeshan/config
-
-# gcloud login in the jenkins runner container
-
-    gcloud auth login
-    gcloud config set project oceanic-isotope-233522
+    gcloud beta compute --project "oceanic-isotope-233522" scp --zone "us-west1-a" ~/.kube/config kk://home/eeshan/
 
 # connect to the host machine
 
     gcloud beta compute --project "oceanic-isotope-233522" ssh --zone "us-west1-a" "kk"
+    mkdir ~/.kube
+    mv ~/config ~/.kube
 
+# within the jenkins runner container
 
+    cd my-jenkins
+    docker-compose exec cicd bash
 
-    export KUBECONFIG=/kube/config
+### in the jenkins runner container
+
+    gcloud auth login
+    gcloud config set project oceanic-isotope-233522
+
+    # export KUBECONFIG=/kube/config
     alias k=kubectl
 
 https://github.com/beacloudgenius/my-jenkins
