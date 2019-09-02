@@ -1,32 +1,26 @@
-# Set up a new VM n1-standard-2
-
-    allow http https
-    note IP address
-    cicd.cloudgeni.us  = set DNS A record
+# Set up a fedora 30 server on Chromebox
 
 # connect to the machine
 
-    gcloud beta compute --project "oceanic-isotope-233522" ssh --zone "us-west1-a" "kk"
+    ssh chromebox
 
 # update and install git
 
-    sudo su
-    apt update && apt install -y git
-    exit # from root
+    sudo dnf install -y git-core
 
 # clone the repo
 
     git clone https://github.com/beacloudgenius/my-jenkins.git
     cd my-jenkins
 
-# setup docker on this
+# setup docker on chromebox
 
     sudo su
     sh docker.sh
     exit # from root
 
     sudo usermod -aG docker $USER
-    exit #out to cloud shell
+    newgrp docker
 
 # Get config
 
@@ -52,14 +46,6 @@
 
     cd ~/my-jenkins/
 
-# edit the docker-compose.yaml to match the subdomain.domain.TLD of your choice
-
-find cicd.cloudgeni.us and replace it your specific detail
-
-    environment:
-      - VIRTUAL_HOST=cicd.cloudgeni.us
-      - LETSENCRYPT_HOST=cicd.cloudgeni.us
-
 # run the jenkins runner using docker-compose
 
     docker-compose up -d
@@ -70,7 +56,7 @@ wait for 1 minute and
 
     docker-compose exec cicd cat /var/jenkins_home/secrets/initialAdminPassword
 
-# open https://subdomain.domain.TLD in a browser
+# open https://cicd.home.cloudgeni.us in a browser
 
     finish through the user creation process
 
