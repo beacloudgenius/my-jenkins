@@ -1,14 +1,13 @@
 dnf update -y
-dnf -y install dnf-plugins-core
-dnf config-manager     --add-repo     https://download.docker.com/linux/fedora/docker-ce.repo
-dnf install docker-ce docker-ce-cli containerd.io
+dnf install -y dnf-plugins-core
+dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+dnf install -y docker-ce docker-ce-cli containerd.io
 systemctl start docker
 systemctl enable docker
 
-usermod -aG docker cloudgenius  # replace eeshan or cloudgenius with your username
+usermod -aG docker cloudgenius  # replace cloudgenius with your username
 
-dnf install docker-compose -y
-
+dnf install -y docker-compose
 
 tee -a /etc/yum.repos.d/google-cloud-sdk.repo << EOM
 [google-cloud-sdk]
