@@ -26,7 +26,7 @@
     exit # from root
 
     sudo usermod -aG docker $USER
-    exit #out to cloud shell
+    exit 
 
 # Get config
 
