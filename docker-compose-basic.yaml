@@ -15,9 +15,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - jenkins_home:/var/jenkins_home
     environment:
-      - VIRTUAL_HOST=cicd.cloudgeni.us
+      - VIRTUAL_HOST=cicd.cloudgenius.app
       - VIRTUAL_PORT=8080
-      - LETSENCRYPT_HOST=cicd.cloudgeni.us
+      - LETSENCRYPT_HOST=cicd.cloudgenius.app
       - LETSENCRYPT_EMAIL=nilesh@cloudgeni.us
 
 volumes:

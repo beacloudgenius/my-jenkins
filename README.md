@@ -1,12 +1,12 @@
-# Set up a new VM n1-standard-2
+# Set up a new VM n1-standard-2 in us-west1-a using debian 10 OS image named kk
 
     allow http https
-    note IP address
-    cicd.cloudgeni.us  = set DNS A record
+    note IP address 34.82.225.8
+    cicd.cloudgenius.app  = set DNS A record
 
 # connect to the machine
 
-    gcloud beta compute --project "oceanic-isotope-233522" ssh --zone "us-west1-a" "kk"
+    gcloud beta compute --project "intense-cortex-271814" ssh --zone "us-west1-a" "kk"
 
 # update and install git
 
@@ -26,12 +26,12 @@
     exit # from root
 
     sudo usermod -aG docker $USER
-    exit 
+    exit
 
 # Get config
 
     rm -rf ~/.kube
-    gcloud container clusters get-credentials andromeda --zone us-west1-a --project oceanic-isotope-233522
+    gcloud container clusters get-credentials andromeda --zone us-west1-a --project intense-cortex-271814
 
 # Read the config
 
@@ -39,11 +39,11 @@
 
 # upload config to the vm using scp
 
-    gcloud beta compute --project "oceanic-isotope-233522" scp --zone "us-west1-a" ~/.kube/config kk://home/eeshan/
+    gcloud beta compute --project "intense-cortex-271814" scp --zone "us-west1-a" ~/.kube/config kk://home/eeshan/
 
 # connect back to the vm again to allow for docker without the need to run sudo
 
-    gcloud beta compute --project "oceanic-isotope-233522" ssh --zone "us-west1-a" "kk"
+    gcloud beta compute --project "intense-cortex-271814" ssh --zone "us-west1-a" "kk"
 
 # place config in ~/.kube/config
 
@@ -54,11 +54,11 @@
 
 # edit the docker-compose.yaml to match the subdomain.domain.TLD of your choice
 
-find cicd.cloudgeni.us and replace it your specific detail
+find cicd.cloudgenius.app and replace it your specific detail
 
     environment:
-      - VIRTUAL_HOST=cicd.cloudgeni.us
-      - LETSENCRYPT_HOST=cicd.cloudgeni.us
+      - VIRTUAL_HOST=cicd.cloudgenius.app
+      - LETSENCRYPT_HOST=cicd.cloudgenius.app
 
 # run the jenkins runner using docker-compose
 
@@ -94,7 +94,7 @@ PS: location of gcloud in shell (/google/google-cloud-sdk/bin/) is different fro
 
     follow instructions on the terminal
 
-    gcloud config set project oceanic-isotope-233522
+    gcloud config set project intense-cortex-271814
 
     # export KUBECONFIG=/kube/config
     alias k=kubectl
