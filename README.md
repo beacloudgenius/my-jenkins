@@ -67,9 +67,14 @@ find cicd.cloudgenius.app and replace it your specific detail
       - VIRTUAL_HOST=cicd.cloudgenius.app
       - LETSENCRYPT_HOST=cicd.cloudgenius.app
 
-# check
+# check secrets in docker-compose.yaml
 
-    GKE_SERVICE_ACCOUNT in docker-compose.yaml to make sure it's valid for k8s cluster
+    - GKE_SERVICE_ACCOUNT in docker-compose.yaml to make sure it's valid for k8s cluster
+    - D_USER=lvnilesh
+    - DH_PAT=token get one from dockerhub
+    - GH_PAT=token get one from github
+    - AWS_ACCESS_KEY_ID=id get one from AWS
+    - AWS_SECRET_ACCESS_KEY=secret get one from AWS
 
 # run the jenkins runner using docker-compose
 
