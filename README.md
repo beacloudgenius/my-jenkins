@@ -67,6 +67,10 @@ find cicd.cloudgenius.app and replace it your specific detail
       - VIRTUAL_HOST=cicd.cloudgenius.app
       - LETSENCRYPT_HOST=cicd.cloudgenius.app
 
+# check
+
+    GKE_SERVICE_ACCOUNT in docker-compose.yaml to make sure it's valid for k8s cluster
+
 # run the jenkins runner using docker-compose
 
     docker-compose up -d
