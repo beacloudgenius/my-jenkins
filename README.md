@@ -1,4 +1,8 @@
-# Set up a new VM n1-standard-2 in us-west1-a using debian 10 OS image named kk
+# Set up a new VM
+    named cicd
+    size e2-standard-2
+    in us-west1-a
+    using debian 10 OS image
 
     allow http https
     note IP address 34.82.225.8
@@ -6,7 +10,7 @@
 
 # connect to the machine
 
-    gcloud beta compute --project "intense-cortex-271814" ssh --zone "us-west1-a" "kk"
+    gcloud beta compute --project "intense-cortex-271814" ssh --zone "us-west1-a" "cicd"
 
 # update and install git
 
@@ -39,11 +43,11 @@
 
 # upload config to the vm using scp
 
-    gcloud beta compute --project "intense-cortex-271814" scp --zone "us-west1-a" ~/.kube/config kk://home/eeshan/
+    gcloud beta compute --project "intense-cortex-271814" scp --zone "us-west1-a" ~/.kube/config cicd://home/eeshan/
 
 # connect back to the vm again to allow for docker without the need to run sudo
 
-    gcloud beta compute --project "intense-cortex-271814" ssh --zone "us-west1-a" "kk"
+    gcloud beta compute --project "intense-cortex-271814" ssh --zone "us-west1-a" "cicd"
 
 # place config in ~/.kube/config
 
