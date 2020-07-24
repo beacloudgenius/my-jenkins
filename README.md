@@ -39,11 +39,14 @@
 
 # Read the config
 
-    check path in config
+    check ~/.kube
+    check ~/.config/gcloud
+
+    check cmd-path: in ~/.kube/config
 
 # upload config to the vm using scp
 
-    gcloud beta compute --project "intense-cortex-271814" scp --zone "us-west1-a" ~/.kube/config cicd://home/eeshan/
+    gcloud beta compute --project "intense-cortex-271814" scp --zone "us-west1-a" ~/.kube/config cicd://home/ubuntu/
 
 # connect back to the vm again to allow for docker without the need to run sudo
 
