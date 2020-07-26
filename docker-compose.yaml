@@ -47,7 +47,7 @@ services:
       - GKE_COMPUTE_ZONE=us-west1-a
       - GKE_CLUSTER_NAME=andromeda
       - D_USER=lvnilesh
-      - DH_PAT=token
+      - D_PASS=token
       - GH_PAT=token
       - AWS_ACCESS_KEY_ID=id
       - AWS_SECRET_ACCESS_KEY=secret

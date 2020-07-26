@@ -71,7 +71,7 @@ find cicd.cloudgenius.app and replace it your specific detail
 
     - GKE_SERVICE_ACCOUNT in docker-compose.yaml to make sure it's valid for k8s cluster
     - D_USER=lvnilesh
-    - DH_PAT=token get one from dockerhub
+    - D_PASS=token get one from dockerhub
     - GH_PAT=token get one from github
     - AWS_ACCESS_KEY_ID=id get one from AWS
     - AWS_SECRET_ACCESS_KEY=secret get one from AWS
