@@ -32,8 +32,8 @@ RUN apt install -y python3-pip
 RUN pip3 install awscli --upgrade --user
 RUN echo "export PATH=/root/.local/bin:$PATH" >> /root/.bashrc
 
-RUN curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
-RUN echo "deb https://deb.nodesource.com/node_12.x stretch main" | sudo tee /etc/apt/sources.list.d/nodesource.list
-RUN echo "deb-src https://deb.nodesource.com/node_12.x stretch main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list
+RUN curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -
+RUN echo "deb https://deb.nodesource.com/node_14.x buster main" | tee /etc/apt/sources.list.d/nodesource.list
+RUN echo "deb-src https://deb.nodesource.com/node_14.x buster main" | tee -a /etc/apt/sources.list.d/nodesource.list
 RUN apt-get update
 RUN apt-get install -y nodejs
