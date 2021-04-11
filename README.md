@@ -69,6 +69,11 @@ find cicd.cloudgenius.app and replace it your specific detail
 
 # check secrets in docker-compose.yaml
 
+encode the service account json using base64
+
+    cat svcaccount.json | base64 |  tr -d "\n"
+
+
     - GKE_SERVICE_ACCOUNT in docker-compose.yaml to make sure it's valid for k8s cluster
     - D_USER=lvnilesh
     - D_PASS=token get one from dockerhub
